@@ -91,7 +91,7 @@ Grouter.get(
     //
     //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
     res.redirect(
-      `https://yuvraj1307.github.io/token=${token}&name=${user.name}&role=${user.Role}`
+      `https://yuvraj1307.github.io?token=${token}&name=${user.name}&role=${user.Role}`
     );
   }
 );
