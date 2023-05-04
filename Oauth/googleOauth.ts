@@ -16,9 +16,9 @@ passport.use(
   new GoogleStrategy(
     {
       clientID:
-        "221992717439-u77bv2tpqo6uhdbatucjbcasjnsi1828.apps.googleusercontent.com",
-      clientSecret: "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",
-      callbackURL: "http://localhost:4500/auth/google/callback",
+        "151213675805-hkbtnbt6b9o4la3o7io9p1k3il4b2ruk.apps.googleusercontent.com",
+      clientSecret: "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",
+      callbackURL: "https://salmon-coral-gear.cyclic.app/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, cb) {
       interface User {
