@@ -12,7 +12,9 @@ import {
   import jwt from "jsonwebtoken";
 import DoctorModel from "../model/DoctorModel";
  
-  
+// 221992717439-u77bv2tpqo6uhdbatucjbcasjnsi1828.apps.googleusercontent.com
+
+// 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
   passport.use(
     new GoogleStrategy(
       {
@@ -72,7 +74,7 @@ import DoctorModel from "../model/DoctorModel";
           res.send({isExist:false})
         }
       }else if(type==="login"){
-        res.redirect(`http://localhost:4500/doctor/auth/google?type=login`)
+        res.redirect(`https://salmon-coral-gear.cyclic.app/doctor/auth/google?type=login`)
       }
      
     } catch (error:any) {
@@ -174,3 +176,11 @@ import DoctorModel from "../model/DoctorModel";
   
   export default DoctorRouter;
   
+
+
+
+
+  // 750955027234-a6bv2r2bjf89nkmpqplc4pneluotueph.apps.googleusercontent.com
+
+
+  //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
