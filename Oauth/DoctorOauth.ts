@@ -19,7 +19,7 @@ import DoctorModel from "../model/DoctorModel";
         clientID:
           "221992717439-u77bv2tpqo6uhdbatucjbcasjnsi1828.apps.googleusercontent.com",
         clientSecret: "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",
-        callbackURL: "http://localhost:4500/doctor/auth/google/callback",
+        callbackURL: "https://salmon-coral-gear.cyclic.app/doctor/auth/google/callback",
       },
       async function (accessToken, refreshToken, profile, cb) {
         interface User {
