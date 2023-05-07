@@ -56,10 +56,35 @@ import DoctorModel from "../model/DoctorModel";
       }
     )
   );
+
+  DoctorRouter.get("/check", async (req,res)=>{
+    let type=req.query.type
+    let UPRN=req.query.UPRN
+
+    console.log(type,UPRN)
+    try {
+      if(type==="signup"){
+
+        let data=await DoctorModel.findOne({UPRN})
+        if(data?.email){
+          res.send({isExist:true})
+        }else{
+          res.send({isExist:false})
+        }
+      }else if(type==="login"){
+        res.redirect(`http://localhost:4500/doctor/auth/google?type=login`)
+      }
+     
+    } catch (error:any) {
+     res.send({error:error.message})
+    }
+    // res.send("ok")
+ })
   DoctorRouter.get(
     "/auth/google",(req,res,next)=>{
         const UPRN = req.query.UPRN;
-  const state = JSON.stringify({ UPRN });
+        let type=req.query.type
+  const state = JSON.stringify({ UPRN,type });
     passport.authenticate("google", { scope: ["profile", "email"],  state })(req, res, next);
     }
   );
@@ -82,27 +107,70 @@ import DoctorModel from "../model/DoctorModel";
     }),
    async function (req, res) {
       let user = req.user as IUser;
-      const UPRN:any = JSON.parse(req.query.state as string).UPRN;
-      let data= await DoctorModel.findByIdAndUpdate({_id:user["_id"]},{UPRN:UPRN})
-      // console.log(data)
-      // console.log(UPRN)
-      var token = jwt.sign(
-        {
-          email: user.email,
-          id: user._id,
-          status: user.status,
-          name: user.name,
-          role: user.Role,
-        },
-        "masai"
-      );
+      let type=JSON.parse(req.query.state as string).type
+      if(user.UPRN==="" && type==="signup"){
+        const UPRN:any = JSON.parse(req.query.state as string).UPRN;
+        let data= await DoctorModel.findByIdAndUpdate({_id:user["_id"]},{UPRN:UPRN})
+        var token = jwt.sign(
+          {
+            email: user.email,
+            id: user._id,
+            status: user.status,
+            name: user.name,
+            role: user.Role,
+          },
+          "masai"
+        );
+        
+        //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
+        res.redirect(
+          `https://yuvraj1307.github.io?token=${token}&name=${user.name}&role=${user.Role}`
+        );
+      }else if(user.UPRN==="" && type==="login"){
+        let data=await DoctorModel.findByIdAndRemove({_id:user["_id"]})
+        return res.redirect(`http://127.0.0.1:5501/Frontend/doctor_signup.html`)
+      }else if(user.UPRN!=="" && type==="login"){
+        var token = jwt.sign(
+          {
+            email: user.email,
+            id: user._id,
+            status: user.status,
+            name: user.name,
+            role: user.Role,
+          },
+          "masai"
+        );
+        
+        //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
+        res.redirect(
+          `https://yuvraj1307.github.io?token=${token}&name=${user.name}&role=${user.Role}`
+        );
+      }
       
-      //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
-      res.redirect(
-        `https://yuvraj1307.github.io?token=${token}&name=${user.name}&role=${user.Role}`
-      );
+      // return res.redirect(`http://127.0.0.1:5501/Frontend/doctor_signup.html`)
+      // // console.log(data)
+      // // console.log(UPRN)
+      // var token = jwt.sign(
+      //   {
+      //     email: user.email,
+      //     id: user._id,
+      //     status: user.status,
+      //     name: user.name,
+      //     role: user.Role,
+      //   },
+      //   "masai"
+      // );
+      
+      // //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
+      // res.redirect(
+      //   `https://yuvraj1307.github.io?token=${token}&name=${user.name}&role=${user.Role}`
+      // );
     }
   );
+
+
+
+
   
   export default DoctorRouter;
   
