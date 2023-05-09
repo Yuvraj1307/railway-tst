@@ -20,7 +20,7 @@ passport2.use(
     {
       clientID:"750955027234-a6bv2r2bjf89nkmpqplc4pneluotueph.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: "http://localhost:4500/customer/user/auth/google/callback",
+      callbackURL: "https://salmon-coral-gear.cyclic.app/customer/user/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, cb) {
       interface User {
