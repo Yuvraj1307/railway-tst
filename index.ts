@@ -8,7 +8,7 @@ app.use(cors())
 app.get("/",(req:Request,res:Response):void=>{
     res.send("hello")
 })
-app.use("/",Grouter)
+app.use("/customer",Grouter)
 app.use("/doctor",DoctorRouter)
 app.listen(4500,async ()=>{
     try{
