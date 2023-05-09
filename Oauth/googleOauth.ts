@@ -5,7 +5,7 @@ import {
   Strategy as GoogleStrategy,
   StrategyOptionsWithRequest,
 } from "passport-google-oauth20";
-import passport from "passport";
+import passport2 from "passport";
 import { v4 as uuidv4 } from "uuid";
 import express, { Router } from "express";
 import Customermodel from "../model/CustomerModel";
@@ -13,13 +13,14 @@ import { Document } from "mongoose";
 const Grouter: Router = express.Router();
 import jwt from "jsonwebtoken";
 
-passport.use(
+// "151213675805-hkbtnbt6b9o4la3o7io9p1k3il4b2ruk.apps.googleusercontent.com",
+// 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
+passport2.use(
   new GoogleStrategy(
     {
-      clientID:
-        "151213675805-hkbtnbt6b9o4la3o7io9p1k3il4b2ruk.apps.googleusercontent.com",
-      clientSecret: "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",
-      callbackURL: "https://salmon-coral-gear.cyclic.app/customer/auth/google/callback",
+      clientID:"750955027234-a6bv2r2bjf89nkmpqplc4pneluotueph.apps.googleusercontent.com",
+      clientSecret: "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",
+      callbackURL: "http://localhost:4500/customer/user/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, cb) {
       interface User {
@@ -58,7 +59,7 @@ passport.use(
 );
 Grouter.get(
   "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  passport2.authenticate("google", { scope: ["profile", "email"] })
 );
 
 interface IUser extends Document {
@@ -72,7 +73,7 @@ interface IUser extends Document {
 
 Grouter.get(
   "/auth/google/callback",
-  passport.authenticate("google", {
+  passport2.authenticate("google", {
     failureRedirect: "/google/login",
     session: false,
   }),

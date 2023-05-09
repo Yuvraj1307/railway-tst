@@ -145,7 +145,7 @@ import DoctorModel from "../model/DoctorModel";
         
         //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
         res.redirect(
-          `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${user.name}&role=${user.Role}`
+          `http://127.0.0.1:5501/Frontend/index.html?token=${token}&name=${user.name}&role=${user.Role}`
         );
       }
       
