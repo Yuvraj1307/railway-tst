@@ -96,7 +96,7 @@ DoctorRouter.get("/check", async (req,res)=>{
 })
 DoctorRouter.get(
   "/auth/google",(req,res,next)=>{
-      const UPRN = req.query.UPRN;
+      const UPRN = req.query.UPRN || "";
       let type=req.query.type;
       let from=req.query.from
 const state = JSON.stringify({ UPRN,type,from });
