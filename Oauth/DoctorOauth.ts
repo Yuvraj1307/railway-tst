@@ -184,7 +184,7 @@ interface User {
             );
       }
 
-    }else if(type==="signup" && from==="customer"){
+    }else if(type==="signup" && from==="customer" && UPRN==undefined){
       interface User {
         name: string;
         email: string;
