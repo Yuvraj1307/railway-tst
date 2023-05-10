@@ -185,7 +185,7 @@ interface User {
       }
 
     }else if(type==="signup" && from==="customer"){
-      res.redirect(`/doctor/login`)
+      // res.redirect(`/doctor/login`)
       // interface User {
       //   name: string;
       //   email: string;
@@ -194,29 +194,29 @@ interface User {
       //   Pets?: string[];
       //   status: boolean;
       // }
-      // const newUser = new Customermodel({
-      //   name: user.name,
-      //   email: user.email,
-      //   password: uuidv4(),
-      //   Role: from,
-      //   Pets: [],
-      //   status: true,
-      // });
+      const newUser = new Customermodel({
+        name: user.name,
+        email: user.email,
+        password: uuidv4(),
+        Role: from,
+        Pets: [],
+        status: true,
+      });
 
-      // await newUser.save();
-      // var token = jwt.sign(
-      //   {
-      //     email: newUser.email,
-      //     id: newUser._id,
-      //     status: newUser.status,
-      //     name: newUser.name,
-      //     role: newUser.Role ,
-      //   },
-      //   "masai"
-      // );
-      // return   res.redirect(
-      //   `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${newUser.name}&role=${newUser.Role}`
-      // );
+      await newUser.save();
+      var token = jwt.sign(
+        {
+          email: newUser.email,
+          id: newUser._id,
+          status: newUser.status,
+          name: newUser.name,
+          role: newUser.Role ,
+        },
+        "masai"
+      );
+       res.redirect(
+        `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${newUser.name}&role=${newUser.Role}`
+      );
 
     }else if(type==="login" && from==="customer"){
     //   let User = await Customermodel.findOne({email: user.email});
@@ -248,9 +248,10 @@ interface User {
 
 );
 
-DoctorRouter.get("/login",(req,res)=>{
-  res.send("ok")
-})
+// DoctorRouter.get("/login",(req,res)=>{
+ 
+//   res.send("ok")
+// })
 
 // DoctorRouter.get(
 //   "/auth/google/callback",
