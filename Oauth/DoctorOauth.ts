@@ -219,25 +219,25 @@ interface User {
       );
 
     }else if(type==="login" && from==="customer"){
-    //   let User = await Customermodel.findOne({email: user.email});
+      let User = await Customermodel.findOne({email: user.email});
 
-    //   if (User) {
-    //     var token = jwt.sign(
-    //           {
-    //             email: User.email,
-    //             id: User._id,
-    //             status: User.status,
-    //             name: User.name,
-    //             role: User.Role ,
-    //           },
-    //           "masai"
-    //         );
+      if (User) {
+        var token = jwt.sign(
+              {
+                email: User.email,
+                id: User._id,
+                status: User.status,
+                name: User.name,
+                role: User.Role ,
+              },
+              "masai"
+            );
             
-    //         //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
-    //         return   res.redirect(
-    //           `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${User.name}&role=${User.Role}`
-    //         );
-    // }
+            //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
+                res.redirect(
+              `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${User.name}&role=${User.Role}`
+            );
+    }
     
     
   
