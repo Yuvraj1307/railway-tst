@@ -48,7 +48,7 @@ import DoctorModel from "../model/DoctorModel";
             name: name,
             email: email,
             password: uuidv4(),
-            Role: "doctor",
+            Role: "",
             status: true,
           });
   
@@ -62,17 +62,19 @@ import DoctorModel from "../model/DoctorModel";
   DoctorRouter.get("/check", async (req,res)=>{
     let type=req.query.type
     let UPRN=req.query.UPRN
-
+    let from=req.query.from
     console.log(type,UPRN)
     try {
       if(type==="signup"){
+         if(from==="doctor"){
 
-        let data=await DoctorModel.findOne({UPRN})
-        if(data?.email){
-          res.send({isExist:true})
-        }else{
-          res.send({isExist:false})
-        }
+           let data=await DoctorModel.findOne({UPRN})
+           if(data?.email){
+             res.send({isExist:true})
+           }else{
+             res.send({isExist:false})
+           }
+         }
       }else if(type==="login"){
         res.redirect(`https://salmon-coral-gear.cyclic.app/doctor/auth/google?type=login`)
       }
@@ -85,8 +87,9 @@ import DoctorModel from "../model/DoctorModel";
   DoctorRouter.get(
     "/auth/google",(req,res,next)=>{
         const UPRN = req.query.UPRN;
-        let type=req.query.type
-  const state = JSON.stringify({ UPRN,type });
+        let type=req.query.type;
+        let from=req.query.from
+  const state = JSON.stringify({ UPRN,type,from });
     passport.authenticate("google", { scope: ["profile", "email"],  state })(req, res, next);
     }
   );
@@ -110,9 +113,10 @@ import DoctorModel from "../model/DoctorModel";
    async function (req, res) {
       let user = req.user as IUser;
       let type=JSON.parse(req.query.state as string).type
-      if(user.UPRN==="" && type==="signup"){
+      let from=JSON.parse(req.query.state as string).from
+      if(user.UPRN==="" && type==="signup" && from==="doctor"){
         const UPRN:any = JSON.parse(req.query.state as string).UPRN;
-        let data= await DoctorModel.findByIdAndUpdate({_id:user["_id"]},{UPRN:UPRN})
+        let data= await DoctorModel.findByIdAndUpdate({_id:user["_id"]},{UPRN:UPRN,Role:from})
         var token = jwt.sign(
           {
             email: user.email,
@@ -128,7 +132,8 @@ import DoctorModel from "../model/DoctorModel";
         res.redirect(
           `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${user.name}&role=${user.Role}`
         );
-      }else if(user.UPRN==="" && type==="login"){
+      }
+      else if(user.UPRN==="" && type==="login"){
         let data=await DoctorModel.findByIdAndRemove({_id:user["_id"]})
         return res.redirect(`http://127.0.0.1:5501/Frontend/doctor_signup.html`)
       }else if(user.UPRN!=="" && type==="login"){
