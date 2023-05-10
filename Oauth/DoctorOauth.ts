@@ -160,7 +160,7 @@ interface User {
           "masai"
         );
         return   res.redirect(
-          `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${user.name}&role=${user.Role}`
+          `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${newUser.name}&role=${newUser.role}`
         );
       
     }else if(type==="login" && from==="doctor"){
@@ -180,7 +180,7 @@ interface User {
             
             //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
             return   res.redirect(
-              `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${user.name}&role=${user.Role}`
+              `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${User.name}&role=${User.role}`
             );
       }
 
@@ -214,7 +214,7 @@ interface User {
         "masai"
       );
       return   res.redirect(
-        `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${user.name}&role=${user.Role}`
+        `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${newUser.name}&role=${newUser.Role}`
       );
 
     }else if(type==="login" && from==="customer"){
@@ -234,7 +234,7 @@ interface User {
             
             //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
             return   res.redirect(
-              `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${user.name}&role=${user.Role}`
+              `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${User.name}&role=${User.Role}`
             );
     }
     // if(user.UPRN==="" && type==="signup" && from==="doctor"){
