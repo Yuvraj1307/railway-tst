@@ -182,7 +182,60 @@ interface User {
             return   res.redirect(
               `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${user.name}&role=${user.Role}`
             );
+      }
 
+    }else if(type==="signup" && from==="customer"){
+      interface User {
+        name: string;
+        email: string;
+        password: string;
+        Role: string;
+        Pets?: string[];
+        status: boolean;
+      }
+      const newUser = new Customermodel({
+        name: user.name,
+        email: user.email,
+        password: uuidv4(),
+        Role: from,
+        Pets: [],
+        status: true,
+      });
+
+      await newUser.save();
+      var token = jwt.sign(
+        {
+          email: newUser.email,
+          id: newUser._id,
+          status: newUser.status,
+          name: newUser.name,
+          role: newUser.Role ,
+        },
+        "masai"
+      );
+      return   res.redirect(
+        `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${user.name}&role=${user.Role}`
+      );
+
+    }else if(type==="login" && from==="customer"){
+      let User = await Customermodel.findOne({email: user.email});
+
+      if (User) {
+        var token = jwt.sign(
+              {
+                email: User.email,
+                id: User._id,
+                status: User.status,
+                name: User.name,
+                role: User.Role ,
+              },
+              "masai"
+            );
+            
+            //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
+            return   res.redirect(
+              `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${user.name}&role=${user.Role}`
+            );
     }
     // if(user.UPRN==="" && type==="signup" && from==="doctor"){
     //   const UPRN:any = JSON.parse(req.query.state as string).UPRN;
@@ -245,8 +298,10 @@ interface User {
     
   
   }
-
+  
 }
+
+
 );
 
 // DoctorRouter.get(
