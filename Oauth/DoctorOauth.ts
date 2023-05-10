@@ -90,7 +90,7 @@ DoctorRouter.get("/check", async (req,res)=>{
     }
    
   } catch (error:any) {
-   res.send({error:error.message})
+   res.send({error})
   }
   // res.send("ok")
 })
@@ -237,64 +237,7 @@ interface User {
               `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${User.name}&role=${User.Role}`
             );
     }
-    // if(user.UPRN==="" && type==="signup" && from==="doctor"){
-    //   const UPRN:any = JSON.parse(req.query.state as string).UPRN;
-    //   let data= await DoctorModel.findByIdAndUpdate({_id:user["_id"]},{UPRN:UPRN,Role:from})
-    //   var token = jwt.sign(
-    //     {
-    //       email: user.email,
-    //       id: user._id,
-    //       status: user.status,
-    //       name: user.name,
-    //       role: user.Role,
-    //     },
-    //     "masai"
-    //   );
-      
-    //   //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
-    //   res.redirect(
-    //     `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${user.name}&role=${user.Role}`
-    //   );
-    // }else if(user.UPRN===""||user.UPRN===undefined && from==="customer" && type==="signup"){
-      
-    //   let customer=new Customermodel({
-    //     name: user.name,
-    //     email: user.email,
-    //     password: uuidv4(),
-    //     Role: from,
-    //     Pets: [],
-    //     status: true,
-    //   })
-    //   await customer.save()
-    //   var token = jwt.sign(
-    //     {
-    //       email: customer.email,
-    //       id: customer._id,
-    //       status: customer.status,
-    //       name: customer.name,
-    //       role: customer.Role,
-    //     },
-    //     "masai"
-    //   );
-    //   let data=await DoctorModel.findByIdAndRemove({_id:user["_id"]})
-    //   return res.redirect(`http://127.0.0.1:5501/Frontend/index.html?token=${token}&name=${customer.name}&role=${customer.Role}`)
-    // }else if(user.UPRN!=="" && type==="login" && from==="doctor"){
-    //   var token = jwt.sign(
-    //     {
-    //       email: user.email,
-    //       id: user._id,
-    //       status: user.status,
-    //       name: user.name,
-    //       role: user.Role,
-    //     },
-    //     "masai"
-    //   );
-      
-    //   //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
-    //   res.redirect(
-    //     `http://127.0.0.1:5501/Frontend/index.html?token=${token}&name=${user.name}&role=${user.Role}`
-    //   );
-    // }
+    
     
   
   }
