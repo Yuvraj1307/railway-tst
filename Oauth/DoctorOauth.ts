@@ -184,59 +184,60 @@ interface User {
             );
       }
 
-    }else if(type==="signup" && from==="customer" && UPRN===""){
-      interface User {
-        name: string;
-        email: string;
-        password: string;
-        Role: string;
-        Pets?: string[];
-        status: boolean;
-      }
-      const newUser = new Customermodel({
-        name: user.name,
-        email: user.email,
-        password: uuidv4(),
-        Role: from,
-        Pets: [],
-        status: true,
-      });
+    }else if(type==="signup" && from==="customer"){
+      res.redirect(`/doctor/login`)
+      // interface User {
+      //   name: string;
+      //   email: string;
+      //   password: string;
+      //   Role: string;
+      //   Pets?: string[];
+      //   status: boolean;
+      // }
+      // const newUser = new Customermodel({
+      //   name: user.name,
+      //   email: user.email,
+      //   password: uuidv4(),
+      //   Role: from,
+      //   Pets: [],
+      //   status: true,
+      // });
 
-      await newUser.save();
-      var token = jwt.sign(
-        {
-          email: newUser.email,
-          id: newUser._id,
-          status: newUser.status,
-          name: newUser.name,
-          role: newUser.Role ,
-        },
-        "masai"
-      );
-      return   res.redirect(
-        `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${newUser.name}&role=${newUser.Role}`
-      );
+      // await newUser.save();
+      // var token = jwt.sign(
+      //   {
+      //     email: newUser.email,
+      //     id: newUser._id,
+      //     status: newUser.status,
+      //     name: newUser.name,
+      //     role: newUser.Role ,
+      //   },
+      //   "masai"
+      // );
+      // return   res.redirect(
+      //   `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${newUser.name}&role=${newUser.Role}`
+      // );
 
     }else if(type==="login" && from==="customer"){
-      let User = await Customermodel.findOne({email: user.email});
+    //   let User = await Customermodel.findOne({email: user.email});
 
-      if (User) {
-        var token = jwt.sign(
-              {
-                email: User.email,
-                id: User._id,
-                status: User.status,
-                name: User.name,
-                role: User.Role ,
-              },
-              "masai"
-            );
+    //   if (User) {
+    //     var token = jwt.sign(
+    //           {
+    //             email: User.email,
+    //             id: User._id,
+    //             status: User.status,
+    //             name: User.name,
+    //             role: User.Role ,
+    //           },
+    //           "masai"
+    //         );
             
-            //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
-            return   res.redirect(
-              `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${User.name}&role=${User.Role}`
-            );
-    }
+    //         //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
+    //         return   res.redirect(
+    //           `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${User.name}&role=${User.Role}`
+    //         );
+    // }
     
     
   
@@ -246,6 +247,10 @@ interface User {
 
 
 );
+
+DoctorRouter.get("/login",(req,res)=>{
+  res.send("ok")
+})
 
 // DoctorRouter.get(
 //   "/auth/google/callback",
