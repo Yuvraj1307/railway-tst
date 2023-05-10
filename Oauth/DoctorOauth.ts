@@ -11,6 +11,7 @@ import { Document } from "mongoose";
 const DoctorRouter: Router = express.Router();
 import jwt from "jsonwebtoken";
 import DoctorModel from "../model/DoctorModel";
+import Customermodel from "../model/CustomerModel";
 
 // 221992717439-u77bv2tpqo6uhdbatucjbcasjnsi1828.apps.googleusercontent.com
 
@@ -74,6 +75,8 @@ DoctorRouter.get("/check", async (req,res)=>{
          }else{
            res.send({isExist:false})
          }
+       }else if(from==="customer"){
+        res.send({isExist:false})
        }
     }else if(type==="login"){
       if(from==="doctor"){
@@ -135,9 +138,29 @@ DoctorRouter.get(
       res.redirect(
         `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${user.name}&role=${user.Role}`
       );
-    }else if(user.UPRN==="" && type==="login"){
+    }else if(user.UPRN===""||user.UPRN===undefined && from==="customer" && type==="signup"){
+      
+      let customer=new Customermodel({
+        name: user.name,
+        email: user.email,
+        password: uuidv4(),
+        Role: from,
+        Pets: [],
+        status: true,
+      })
+      await customer.save()
+      var token = jwt.sign(
+        {
+          email: customer.email,
+          id: customer._id,
+          status: customer.status,
+          name: customer.name,
+          role: customer.Role,
+        },
+        "masai"
+      );
       let data=await DoctorModel.findByIdAndRemove({_id:user["_id"]})
-      return res.redirect(`http://127.0.0.1:5501/Frontend/doctor_signup.html`)
+      return res.redirect(`http://127.0.0.1:5501/Frontend/index.html?token=${token}&name=${customer.name}&role=${customer.Role}`)
     }else if(user.UPRN!=="" && type==="login" && from==="doctor"){
       var token = jwt.sign(
         {
