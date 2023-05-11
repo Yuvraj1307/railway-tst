@@ -160,7 +160,7 @@ interface User {
           "secret"
         ); 
         return   res.redirect(
-          `http://127.0.0.1:5501/Frontend/doctorPage.html?token=${token}&name=${newUser.name}&role=${newUser.role}&id=${newUser._id}&status=${newUser.status}`
+          `https://pet-mate-veterinary.netlify.app/Frontend/doctorPage.html?token=${token}&name=${newUser.name}&role=${newUser.role}&id=${newUser._id}&status=${newUser.status}`
         );
       
     }else if(type==="login" && from==="doctor"){
@@ -180,7 +180,7 @@ interface User {
             
             //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
             return   res.redirect(
-              `http://127.0.0.1:5501/Frontend/doctorPage.html?token=${token}&name=${User.name}&role=${User.role}&id=${User._id}&status=${User.status}`
+              `https://pet-mate-veterinary.netlify.app/Frontend/doctorPage.html?token=${token}&name=${User.name}&role=${User.role}&id=${User._id}&status=${User.status}`
             );
       }
 
@@ -215,7 +215,7 @@ interface User {
         "secret"
       );
        res.redirect(
-        `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${newUser.name}&role=${newUser.Role}&id=${newUser._id}&status=${newUser.status}`
+        `https://pet-mate-veterinary.netlify.app/Frontend/home.html?token=${token}&name=${newUser.name}&role=${newUser.Role}&id=${newUser._id}&status=${newUser.status}`
       );
 
     }else if(type==="login" && from==="customer"){
@@ -235,7 +235,7 @@ interface User {
             
             //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
                 res.redirect(
-              `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${User.name}&role=${User.Role}&id=${User._id}&status=${User.status}`
+              `https://pet-mate-veterinary.netlify.app/home.html?token=${token}&name=${User.name}&role=${User.Role}&id=${User._id}&status=${User.status}`
             );
     }
     
