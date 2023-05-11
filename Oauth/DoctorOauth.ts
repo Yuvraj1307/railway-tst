@@ -157,7 +157,7 @@ interface User {
             name: newUser.name,
             role: newUser.role ,
           },
-          "masai"
+          "secret"
         ); 
         return   res.redirect(
           `http://127.0.0.1:5501/Frontend/doctorPage.html?token=${token}&name=${newUser.name}&role=${newUser.role}&id=${newUser._id}&status=${newUser.status}`
@@ -175,7 +175,7 @@ interface User {
                 name: User.name,
                 role: User.role ,
               },
-              "masai"
+              "secret"
             );
             
             //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
@@ -212,7 +212,7 @@ interface User {
           name: newUser.name,
           role: newUser.Role ,
         },
-        "masai"
+        "secret"
       );
        res.redirect(
         `http://127.0.0.1:5501/Frontend/home.html?token=${token}&name=${newUser.name}&role=${newUser.Role}&id=${newUser._id}&status=${newUser.status}`
@@ -230,7 +230,7 @@ interface User {
                 name: User.name,
                 role: User.Role ,
               },
-              "masai"
+              "secret"
             );
             
             //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
