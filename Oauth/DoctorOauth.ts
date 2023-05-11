@@ -152,7 +152,7 @@ interface User {
         var token = jwt.sign(
           {
             email: newUser.email,
-            id: newUser._id,
+            userID: newUser._id,
             status: newUser.status,
             name: newUser.name,
             role: newUser.role ,
@@ -170,7 +170,7 @@ interface User {
         var token = jwt.sign(
               {
                 email: User.email,
-                id: User._id,
+                userID: User._id,
                 status: User.status,
                 name: User.name,
                 role: User.role ,
@@ -207,7 +207,7 @@ interface User {
       var token = jwt.sign(
         {
           email: newUser.email,
-          id: newUser._id,
+          userID: newUser._id,
           status: newUser.status,
           name: newUser.name,
           role: newUser.Role ,
@@ -225,7 +225,7 @@ interface User {
         var token = jwt.sign(
               {
                 email: User.email,
-                id: User._id,
+                userID: User._id,
                 status: User.status,
                 name: User.name,
                 role: User.Role ,
@@ -269,7 +269,7 @@ interface User {
 //       var token = jwt.sign(
 //         {
 //           email: user.email,
-//           id: user._id,
+//           userID: user._id,
 //           status: user.status,
 //           name: user.name,
 //           role: user.Role,
