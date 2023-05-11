@@ -235,7 +235,7 @@ interface User {
             
             //  https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}
                 res.redirect(
-              `https://pet-mate-veterinary.netlify.app/home.html?token=${token}&name=${User.name}&role=${User.Role}&id=${User._id}&status=${User.status}`
+              `https://pet-mate-veterinary.netlify.app/Frontend/home.html?token=${token}&name=${User.name}&role=${User.Role}&id=${User._id}&status=${User.status}`
             );
     }
     
